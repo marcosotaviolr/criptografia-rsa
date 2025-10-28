@@ -128,6 +128,8 @@ fn biguint_para_string(numero: &BigUint) -> String {
 }
 
 fn main() {
+    use std::io::{self, Write};
+    
     let tamanho_chave = 512;
     println!("--- Algoritmo RSA em Rust (Exemplo Educacional, Chave {} bits) ---", tamanho_chave);
 
@@ -142,16 +144,22 @@ fn main() {
     println!("  d: {}", chave_privada.d);
 
     // 2. Criptografia e Descriptografia
-    let mensagem_original_str = "A matematica é a chave para o RSA!";
+    print!("\nDigite a mensagem que deseja criptografar: ");
+    io::stdout().flush().unwrap(); // Garante que o print! seja exibido antes de ler a entrada
+    
+    let mut mensagem_original_str = String::new();
+    io::stdin().read_line(&mut mensagem_original_str).expect("Falha ao ler a mensagem");
+    mensagem_original_str = mensagem_original_str.trim().to_string(); // Remove o \n do final
+    
     println!("\nMensagem Original: \"{}\"", mensagem_original_str);
 
-    let m = string_para_biguint(mensagem_original_str);
+    let m = string_para_biguint(&mensagem_original_str);
     println!("Mensagem como Número (m): {}", m);
 
     let c = criptografar(&m, &chave_publica);
     println!("\nTexto Criptografado (c): {}", c);
 
-    let m_descriptografado = desScriptografar(&c, &chave_privada);
+    let m_descriptografado = descriptografar(&c, &chave_privada);
     println!("\nNúmero Descriptografado (m'): {}", m_descriptografado);
 
     let mensagem_descriptografada_str = biguint_para_string(&m_descriptografado);
