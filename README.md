@@ -1,4 +1,4 @@
-## Mini-Aula Didática: Criptografia RSA
+## Mini-Aula: Criptografia RSA
 RSA (Rivest-Shamir-Adleman), um dos pilares da segurança moderna. O RSA é um algoritmo de criptografia assimétrica desenvolvido em 1977, sendo um dos sistemas de chave pública mais antigos e mais amplamente utilizados.
 O RSA possui quatro Características Principais:
 1. Assimetria: Usa duas chaves diferentes (pública e privada).
